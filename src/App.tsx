@@ -4,11 +4,8 @@ import { Home } from "./component/Home.tsx"
 import { Projects } from "./component/Projects.tsx"
 import { Experience } from "./component/Experience.tsx"
 import { Skills } from "./component/Skills.tsx"
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { Contact } from "./component/Contact.tsx"
 function App() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
 
