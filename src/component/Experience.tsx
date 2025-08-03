@@ -39,9 +39,6 @@ export const Experience = () => {
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Experience
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            My professional journey and the valuable experiences that have shaped my career in technology.
-          </p>
         </div>
 
         <div className="space-y-8">
