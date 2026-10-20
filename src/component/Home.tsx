@@ -1,92 +1,94 @@
-import Image from "./Image.jpeg";
-import { Button } from "../components/ui/button";
-import { Download, Mail } from "lucide-react";
-import { CardContent } from "../components/ui/card";
-import Tilt from "react-parallax-tilt";
+import { motion } from "framer-motion"
+import { FileText, Mail } from "lucide-react"
+import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { Celestial, Cloud, DriftingClouds, Fireflies, Landscape, Leaves, Stars } from "./Scenery"
+import { profile } from "../data/resume"
+
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] as const },
+})
 
 export const Home = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-8">
-      <CardContent className="p-12">
-        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 max-w-4xl">
-          <div className="flex-shrink-0 relative">
-            <div
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-spin"
-              style={{ padding: "4px", animation: "spin 3s linear infinite" }}
+    <section className="sky relative flex min-h-[100svh] flex-col overflow-hidden">
+      <Stars />
+      <Celestial className="absolute right-[7%] top-[13%] size-16 sm:size-24" />
+      <DriftingClouds />
+
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-5 pb-[clamp(190px,26vw,360px)] pt-28 md:grid-cols-[1.25fr_0.75fr] md:pt-32">
+        <div className="text-center md:text-left">
+          <motion.p {...rise(0.1)} className="text-sm font-medium uppercase tracking-[0.22em] text-roof">
+            {profile.role}
+          </motion.p>
+          <motion.h1
+            {...rise(0.2)}
+            className="text-sky-shadow mt-2 font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-7xl"
+          >
+            {profile.name}
+          </motion.h1>
+          <motion.p {...rise(0.3)} className="mt-4 text-lg font-medium text-ink sm:text-xl">
+            {profile.tagline}
+          </motion.p>
+          <motion.p {...rise(0.4)} className="mx-auto mt-4 max-w-xl leading-relaxed text-ink/80 md:mx-0">
+            {profile.intro}
+          </motion.p>
+
+          <motion.div {...rise(0.5)} className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-roof px-6 py-3 font-medium text-roof-ink shadow-[0_4px_0_0_rgb(0_0_0/0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_rgb(0_0_0/0.18)] active:translate-y-0.5 active:shadow-none"
             >
-              <div className="w-full h-full rounded-full bg-white"></div>
-            </div>
-
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-20 animate-pulse scale-110"></div>
-
-            <div className="relative z-10">
-              <Tilt
-                glareEnable={true}
-                glareMaxOpacity={0.2}
-                scale={1.05}
-                className="focus:outline-none"
-              >
-                <img
-                  src={Image}
-                  alt="Aryan Patel"
-                  className="w-[250px] h-[250px] rounded-full object-cover shadow-2xl focus:outline-none"
-                />
-              </Tilt>
-            </div>
-          </div>
-
-          <div className="space-y-6 text-center md:text-left">
-            <div>
-              <h1 className="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Aryan Patel
-              </h1>
-              <p className="text-xl font-semibold text-gray-300">CS @ Georgia Tech</p>
-            </div>
-
-            <p className="text-lg leading-relaxed max-w-2xl text-white-400 font-light">
-              I'm a passionate computer science student with a love for problem-solving and building innovative
-              software solutions. Currently pursuing my degree at Georgia Tech, I enjoy working on projects that
-              challenge me to learn new technologies and create meaningful impact through code. In my free time, I enjoy playing and watching sports like basketball, tennis, and football, as well as reading and spending time with friends and family.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <FileText className="size-4" />
+              View Resume
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-card/80 px-6 py-3 font-medium text-ink shadow-[0_4px_0_0_rgb(0_0_0/0.08)] backdrop-blur transition hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none"
+            >
+              <Mail className="size-4" />
+              Say hello
+            </a>
+            <div className="flex items-center gap-1 pl-1">
               <a
-                href="/Aryan_Patel_Resume.pdf"
+                href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="rounded-full p-2.5 text-ink/80 transition hover:-translate-y-0.5 hover:bg-card/60 hover:text-ink"
               >
-                <Tilt
-                  glareEnable={true}
-                  glareMaxOpacity={0.2}
-                  scale={1.05}
-                  className="focus:outline-none"
-                >
-                  <Button
-                    size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 cursor-pointer shadow-lg hover:shadow-xl"
-                  >
-                    <Download className="w-5 h-5 mr-2" />
-                    Resume
-                  </Button>
-                </Tilt>
+                <FaGithub className="size-5" />
               </a>
-
-              <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.05} className="focus:outline-none">
-                <a href="#contact">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-gray-300 hover:bg-gray-50 hover:border-blue-300 px-8 py-3 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 cursor-pointer shadow-lg hover:shadow-xl"
-                  >
-                    <Mail className="w-5 h-5 mr-2" />
-                    Contact Me
-                  </Button>
-                </a>
-              </Tilt>
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="rounded-full p-2.5 text-ink/80 transition hover:-translate-y-0.5 hover:bg-card/60 hover:text-ink"
+              >
+                <FaLinkedin className="size-5" />
+              </a>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </CardContent>
-    </div>
-  );
-};
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none hidden md:block"
+          aria-hidden="true"
+        >
+          <Cloud variant="tower" className="bob w-full max-w-md opacity-95" />
+        </motion.div>
+      </div>
+
+      <Leaves />
+      <Fireflies className="inset-x-0 bottom-0 h-1/2" />
+      <Landscape className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(220px,30vw,420px)] w-full" />
+    </section>
+  )
+}
